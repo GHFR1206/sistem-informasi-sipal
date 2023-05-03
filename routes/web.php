@@ -2,6 +2,7 @@
 
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Route;
+use App\Http\Controllers\UserController;
 use App\Http\Controllers\ReportController;
 
 /*
@@ -65,3 +66,6 @@ Route::get('/tambah_alat/{id}', 'DataController@insert_new_detail')->name('inser
 // Laporan
 Route::get('/laporan', 'ReportController@getReport')->name('getReport');
 Route::post('/laporan', 'ReportController@postReport')->name('postReport');
+
+//Pegawai
+Route::resource('pegawai', 'UserController');

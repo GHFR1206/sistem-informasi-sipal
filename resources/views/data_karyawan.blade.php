@@ -11,6 +11,15 @@
         <h1 class="h3 mb-2 text-gray-800">Data Toolman</h1>
         <p class="mb-4">Berikut merupakan data Toolman Laboratorium PPLG SMKN 1 Ciomas</p>
 
+        @if (Session::has('berhasil'))
+            <div class="alert alert-success">
+                <button type="button" class="close" data-dismiss="alert" aria-label="Close"><span
+                        aria-hidden="true">&times;</span></button>
+                <strong>Success, &nbsp</strong>
+                {{ Session::get('berhasil') }}
+            </div>
+        @endif
+
         <!-- DataTales Example -->
         <div class="card shadow mb-4">
             <div class="card-header py-3">
@@ -18,7 +27,8 @@
             </div> --}}
                 <div class="card-body">
                     <form class="form-inline my-2 my-lg-2 justify-content-end">
-                        <input class="form-control mr-sm-2" type="search" placeholder="Cari" name="search" aria-label="Cari">
+                        <input class="form-control mr-sm-2" type="search" placeholder="Cari" name="search"
+                            aria-label="Cari">
                         <button class="btn btn-outline-primary my-2 my-sm-0" type="submit"><i
                                 class="fa-solid fa-magnifying-glass"></i></button>
                     </form>
@@ -31,6 +41,7 @@
                                     <th>Nama</th>
                                     <th>Email</th>
                                     <th>Bergabung Pada</th>
+                                    <th>Aksi</th>
                                 </tr>
                             </thead>
                             <tbody>
@@ -40,6 +51,14 @@
                                         <td class="text-capitalize">{{ $user->name }}</td>
                                         <td>{{ $user->email }}</td>
                                         <td>{{ $user->created_at }}</td>
+                                        <td>
+                                            <form action="{{ route('pegawai.destroy', $user->id) }}" method="post">
+                                                @csrf
+                                                @method('DELETE')
+                                                <button type="submit" class="btn btn-danger"><i
+                                                        class="fas fa-trash-can"></i></button>
+                                            </form>
+                                        </td>
                                     </tr>
                                 @empty
                                     <tr>
